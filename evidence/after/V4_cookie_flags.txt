@@ -1,0 +1,12 @@
+# V4. Відсутні прапорці HttpOnly / SameSite у PHPSESSID
+
+> POST http://127.0.0.1:4280/login.php
+> Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; PHPSESSID=7caf130eb74cd935f6c0a18c9e9bdff7
+> Content-Type: application/x-www-form-urlencoded
+> [body] username=admin&password=password&Login=Login&user_token=da7d527c0fed5f47407be9e011026c0334cd617bb08f72523bef51299641b09e
+< HTTP 302
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: PHPSESSID=3629c2013ba416f137533b104c91e139; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax
+< Location: index.php
+
+Прапорці HttpOnly та SameSite присутні: так

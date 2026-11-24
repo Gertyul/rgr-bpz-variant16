@@ -1,0 +1,51 @@
+# Ізольований стенд РГР (варіант 16): DVWA + MariaDB.
+# Застосунок публікується лише на петльовому інтерфейсі 127.0.0.1.
+# БД розміщена в мережі internal (без маршруту назовні).
+name: rgr16
+
+services:
+  dvwa:
+    build: ./dvwa
+    image: rgr16/dvwa:local
+    environment:
+      DB_SERVER: db
+      DB_DATABASE: dvwa
+      DB_USER: dvwa
+      DB_PASSWORD: ${DVWA_DB_PASSWORD:?set in .env}
+      DEFAULT_SECURITY_LEVEL: ${DEFAULT_SECURITY_LEVEL:-low}
+      DVWA_COOKIE_SECRET: ${DVWA_COOKIE_SECRET:-}
+    depends_on: [db]
+    networks: [frontend, backend]
+    ports:
+      - "127.0.0.1:4280:80"
+    restart: unless-stopped
+
+  db:
+    image: docker.io/library/mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DVWA_DB_ROOT_PASSWORD:?set in .env}
+      MARIADB_DATABASE: dvwa
+      MARIADB_USER: dvwa
+      MARIADB_PASSWORD: ${DVWA_DB_PASSWORD:?set in .env}
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks: [backend]
+    restart: unless-stopped
+
+  # «Сторонній сайт» зловмисника для демонстрації CSRF (інше походження: порт 8081).
+  attacker:
+    image: docker.io/library/nginx:1.27-alpine
+    volumes:
+      - ./poc:/usr/share/nginx/html:ro
+    networks: [frontend]
+    ports:
+      - "127.0.0.1:8081:80"
+    profiles: [poc]
+
+networks:
+  frontend: {}
+  backend:
+    internal: true
+
+volumes:
+  dbdata: {}

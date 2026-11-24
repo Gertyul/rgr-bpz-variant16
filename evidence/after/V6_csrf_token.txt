@@ -1,0 +1,8 @@
+# V6. Передбачуваний анти-CSRF токен md5(uniqid())
+
+> GET http://127.0.0.1:4280/login.php
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; path=/; HttpOnly, PHPSESSID=3d2e212daaf0a4eb38d2904c18922fc4; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax, PHPSESSID=158e7158c6ea94e243df0490020dfd6f; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax
+Отриманий токен: ec47536c355738afc8bb91806d8891ba1f9eda1d41a488aee274a5b200d59ec4
+Відтворення uniqid() у межах секунди із заголовка Date (1795495443): збігу не знайдено

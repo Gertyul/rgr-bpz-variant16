@@ -1,0 +1,9 @@
+# V5. Контрольована клієнтом cookie 'security'
+
+Рівень встановлено на impossible: так
+> GET http://127.0.0.1:4280/security.php
+> Cookie: security=low; PHPSESSID=7231df6d937ffdd68792adddf3c0ee3e
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: security=impossible%7C3d7feef35d58237af883b11477747660af0e5c5de4676997f8bfd1e5208fefb1; path=/; HttpOnly, PHPSESSID=c16c5803866195339c9e49c206a2738d; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax
+Після заміни cookie security=low сервер повідомляє рівень: impossible

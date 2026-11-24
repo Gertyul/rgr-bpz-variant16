@@ -1,0 +1,8 @@
+# V5. Контрольована клієнтом cookie 'security'
+
+Рівень встановлено на impossible: так
+> GET http://127.0.0.1:4280/security.php
+> Cookie: security=low; PHPSESSID=9839e4f1394f93e813a3c6755f8b8def
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+Після заміни cookie security=low сервер повідомляє рівень: low

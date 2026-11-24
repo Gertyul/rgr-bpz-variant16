@@ -1,0 +1,27 @@
+# V2. Session fixation
+
+1) Неавтентифікований PHPSESSID=a8bad7684601069b3ee8635017442708
+> GET http://127.0.0.1:4280/login.php
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; path=/; HttpOnly, PHPSESSID=e2646c7d73cffd14179d68c01ccc1043; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax, PHPSESSID=a8bad7684601069b3ee8635017442708; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax
+
+2) Жертва входить із тим самим ідентифікатором:
+> POST http://127.0.0.1:4280/login.php
+> Cookie: PHPSESSID=a8bad7684601069b3ee8635017442708; security=impossible%7C3d7feef35d58237af883b11477747660af0e5c5de4676997f8bfd1e5208fefb1; PHPSESSID=29002747a121312626f88d190be319c2
+> Content-Type: application/x-www-form-urlencoded
+> [body] username=admin&password=password&Login=Login&user_token=c5d0d671f7a8ed80940783ad5d23d7f82229d5e77b4ffb10844d4d0ad659efe4
+< HTTP 302
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: PHPSESSID=f06d3aca51f1bf92bc288ef6d8d61b45; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax, PHPSESSID=d738ab8feda90b4f9da80d51371b27b9; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax
+< Location: login.php
+PHPSESSID після входу: d738ab8feda90b4f9da80d51371b27b9 (НОВИЙ)
+
+3) Повторне використання початкового ідентифікатора на /index.php:
+> GET http://127.0.0.1:4280/index.php
+> Cookie: PHPSESSID=a8bad7684601069b3ee8635017442708
+< HTTP 302
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; path=/; HttpOnly, PHPSESSID=92f661c14cf87ef741f0ca7aa06909ce; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax, PHPSESSID=4507ce296419273fb2ab101b75b86410; expires=Wed, 25 Nov 2026 04:44:03 GMT; Max-Age=86400; path=/; domain=127.0.0.1; HttpOnly; SameSite=Lax
+< Location: login.php
+Результат: перенаправлення на login.php

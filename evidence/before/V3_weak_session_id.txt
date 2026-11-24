@@ -1,0 +1,30 @@
+# V3. Weak Session IDs
+
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: security=low; PHPSESSID=c63445962644d4d0589e0adf54afe52c
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: dvwaSession=1
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: dvwaSession=1; security=low; PHPSESSID=c63445962644d4d0589e0adf54afe52c
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: dvwaSession=2
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: dvwaSession=2; security=low; PHPSESSID=c63445962644d4d0589e0adf54afe52c
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: dvwaSession=3
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: dvwaSession=3; security=low; PHPSESSID=c63445962644d4d0589e0adf54afe52c
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: dvwaSession=4
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: dvwaSession=4; security=low; PHPSESSID=c63445962644d4d0589e0adf54afe52c
+< HTTP 200
+< Date: Tue, 24 Nov 2026 03:30:45 GMT
+< Set-Cookie: dvwaSession=5
+
+Послідовність dvwaSession: ['1', '2', '3', '4', '5']
+Наступне значення передбачається як 6

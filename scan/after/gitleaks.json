@@ -1,0 +1,22 @@
+[
+ {
+  "RuleID": "generic-api-key",
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 54,
+  "EndLine": 54,
+  "StartColumn": 2,
+  "EndColumn": 46,
+  "Match": "user-token: 026d0caed93471b507ed460ebddbd096\r",
+  "Secret": "026d0caed93471b507ed460ebddbd096",
+  "File": "/src/dvwa/vulnerabilities/csrf/help/help.php",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.5192475,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "Fingerprint": "/src/dvwa/vulnerabilities/csrf/help/help.php:generic-api-key:54"
+ }
+]

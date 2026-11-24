@@ -1,0 +1,50 @@
+﻿Інструмент,Правило/ID,Критичність,Файл,Рядок,Вердикт,Коментар
+SAST/Semgrep,tainted-filename,WARNING,instructions.php,26,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,phpinfo-use,ERROR,phpinfo.php,8,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/api/src/HealthController.php,88,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/bac/source/low.php,22,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/bac/source/low.php,35,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/bac/source/low.php,79,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/bac/source/medium.php,21,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/bac/source/medium.php,28,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/bac/source/medium.php,71,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/brute/source/low.php,12,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,echoed-request,ERROR,vulnerabilities/csp/source/jsonp.php,12,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/high.php,26,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/high.php,26,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/high.php,30,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/high.php,30,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/impossible.php,22,FP,Вхід валідовано is_numeric по кожному октету; ін'єкція неможлива
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/impossible.php,22,FP,Вхід валідовано is_numeric по кожному октету; ін'єкція неможлива
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/impossible.php,26,FP,Вхід валідовано is_numeric по кожному октету; ін'єкція неможлива
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/impossible.php,26,FP,Вхід валідовано is_numeric по кожному октету; ін'єкція неможлива
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/low.php,10,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/low.php,10,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/low.php,14,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/low.php,14,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/medium.php,19,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/medium.php,19,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,WARNING,vulnerabilities/exec/source/medium.php,23,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-exec,ERROR,vulnerabilities/exec/source/medium.php,23,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/fi/source/high.php,7,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/sqli/source/low.php,10,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/sqli/source/low.php,31,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/sqli_blind/source/high.php,11,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/sqli_blind/source/high.php,33,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/sqli_blind/source/low.php,11,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/sqli_blind/source/low.php,32,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-sql-string,ERROR,vulnerabilities/sqli_blind/source/medium.php,34,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_help.php,20,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_help.php,22,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_source.php,63,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_source.php,67,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_source.php,68,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_source_all.php,14,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_source_all.php,18,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_source_all.php,22,TP,Небезпечний потік підтверджено ручним оглядом
+SAST/Semgrep,tainted-filename,WARNING,vulnerabilities/view_source_all.php,26,TP,Небезпечний потік підтверджено ручним оглядом
+Secrets/gitleaks,generic-api-key,LOW,vulnerabilities/csrf/help/help.php,54,FP,Приклад токена в тексті довідки
+Config/Trivy,DS-0002,HIGH,Dockerfile,,TP,Image user should not be 'root'
+Config/Trivy,DS-0013,MEDIUM,Dockerfile,24,TP,'RUN cd ...' to change directory
+Config/Trivy,DS-0026,LOW,Dockerfile,,TP,No HEALTHCHECK defined
+Config/Trivy,DS-0029,HIGH,Dockerfile,10,TP,'apt-get' missing '--no-install-recommends'

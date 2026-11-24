@@ -1,0 +1,30 @@
+# V3. Weak Session IDs
+
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; PHPSESSID=3cd7c484759db467c2dc25c2e85631d2
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: dvwaSession=40c716320e05ee6b5a11358767ae06c3; path=/; HttpOnly
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; dvwaSession=40c716320e05ee6b5a11358767ae06c3; PHPSESSID=3cd7c484759db467c2dc25c2e85631d2
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: dvwaSession=fda56d5eba8dfe7fef847344cc547c41; path=/; HttpOnly
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; dvwaSession=fda56d5eba8dfe7fef847344cc547c41; PHPSESSID=3cd7c484759db467c2dc25c2e85631d2
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: dvwaSession=36963d533322488a784153dfb44760e2; path=/; HttpOnly
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; dvwaSession=36963d533322488a784153dfb44760e2; PHPSESSID=3cd7c484759db467c2dc25c2e85631d2
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: dvwaSession=609276dfb547b5be3648b24137939791; path=/; HttpOnly
+> POST http://127.0.0.1:4280/vulnerabilities/weak_id/
+> Cookie: security=low%7C21af74b97169917a79a08fb33b7b0263f15655517e44182a1da2b2209bc9157b; dvwaSession=609276dfb547b5be3648b24137939791; PHPSESSID=3cd7c484759db467c2dc25c2e85631d2
+< HTTP 200
+< Date: Tue, 24 Nov 2026 04:44:03 GMT
+< Set-Cookie: dvwaSession=dfe41fb65493353787e840dbcd5c993a; path=/; HttpOnly
+
+Послідовність dvwaSession: ['40c716320e05ee6b5a11358767ae06c3', 'fda56d5eba8dfe7fef847344cc547c41', '36963d533322488a784153dfb44760e2', '609276dfb547b5be3648b24137939791', 'dfe41fb65493353787e840dbcd5c993a']
+Значення не передбачаються

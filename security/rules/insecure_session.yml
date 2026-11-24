@@ -1,0 +1,38 @@
+rules:
+  # Власне правило РГР (варіант 16: CSRF та керування сесіями).
+  # Виявляє генерацію токена/ідентифікатора на основі uniqid(), значення якого
+  # передбачуване (похідне від поточного часу з мікросекундами) і піддається
+  # перебору. Пор. CWE-330 (використання недостатньо випадкових значень),
+  # CWE-6 (J2EE Misconfiguration), OWASP A07:2021.
+  - id: predictable-token-from-uniqid
+    languages: [php]
+    severity: ERROR
+    message: >-
+      Токен або ідентифікатор формується з uniqid() (md5(uniqid())). Значення
+      uniqid() детерміноване й залежить від часу, тому токен передбачуваний і
+      перебирається. Використовуйте криптографічно стійке джерело
+      (random_bytes/bin2hex) для анти-CSRF токенів та ідентифікаторів сесії.
+    metadata:
+      cwe: "CWE-330: Use of Insufficiently Random Values"
+      owasp: "A07:2021 Identification and Authentication Failures"
+      variant: "16 - CSRF та керування сесіями"
+    patterns:
+      - pattern-either:
+          - pattern: md5(uniqid(...))
+          - pattern: sha1(uniqid(...))
+          - pattern: md5(uniqid())
+
+  # Додатково: сесійна/службова cookie, встановлена через setcookie() із
+  # шостим/сьомим аргументом, що вимикає захист (secure=false, httponly=false).
+  - id: insecure-cookie-flags
+    languages: [php]
+    severity: WARNING
+    message: >-
+      Cookie встановлюється без прапорців безпеки (HttpOnly/Secure). Це дозволяє
+      читати значення через XSS та передавати його незашифрованим каналом.
+    metadata:
+      cwe: "CWE-1004: Sensitive Cookie Without HttpOnly Flag"
+      owasp: "A05:2021 Security Misconfiguration"
+      variant: "16 - CSRF та керування сесіями"
+    patterns:
+      - pattern: setcookie($N, $V, $E, $P, $D, false, false);

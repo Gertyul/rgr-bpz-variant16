@@ -1,0 +1,23 @@
+{
+  "total": 51,
+  "TP": 46,
+  "FP": 5,
+  "by_tool": {
+    "SAST/Semgrep": {
+      "TP": 40,
+      "FP": 4
+    },
+    "SAST/Semgrep (власне)": {
+      "TP": 2,
+      "FP": 0
+    },
+    "Secrets/gitleaks": {
+      "TP": 0,
+      "FP": 1
+    },
+    "Config/Trivy": {
+      "TP": 4,
+      "FP": 0
+    }
+  }
+}
